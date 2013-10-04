@@ -51,8 +51,7 @@ while (<COMMON>) {
     next if /^#/;
     next unless /\S/;
     if (/^-/) {
-	warn "Ignoring invalid package exclusion in the common file, line $.";
-	next;
+	die "Syntax error: package exclusion in the common file, line $.";
     } 
     if (/^(\S+) \| (\S+)$/) {
 	debug("Examining conditional line: $_");
