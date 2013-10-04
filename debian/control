@@ -3,7 +3,7 @@ Section: debathena/base
 Priority: extra
 Standards-Version: 3.9.3
 Maintainer: Debathena Project <debathena@mit.edu>
-Build-Depends: cdbs, debhelper (>= 6), libapt-pkg-perl
+Build-Depends: cdbs, debhelper (>= 6), libapt-pkg-perl, lsb-release
 
 Package: debathena-thirdparty
 Architecture: all
