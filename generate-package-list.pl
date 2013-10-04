@@ -134,11 +134,17 @@ foreach my $pkgname (sort(keys(%packages))) {
 debug("Writing out lists");
 open(DEPS, '>', join('/', $opt_d, 'dependencies')) || die "Can't open $opt_d/dependencies for writing";
 open(RECS, '>', join('/', $opt_d, 'recommendations')) || die "Can't open $opt_d/dependencies for writing";
-foreach (sort(keys(%packages))) {
-    if ($packages{$_} == 2) {
-	print RECS "$_\n";
+foreach my $p (sort(keys(%packages))) {
+    if ($packages{$p} == 2) {
+	print RECS "$p\n";
     } else {
-	print DEPS "$_\n";
+	print DEPS "$p\n";
+	if (exists($depends{$p})) {
+	    foreach (@{$depends{$p}}) {
+		debug("Adding $_ because we added $p");
+		print DEPS "$_\n";
+	    }
+	}
     }
 }
 close(DEPS);
