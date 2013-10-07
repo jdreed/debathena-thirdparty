@@ -80,30 +80,34 @@ while (<COMMON>) {
 }
 close(COMMON);
 
-open(DIST, join('/', $opt_l, $codename)) || die "Can't open $opt_l/$codename";
-debug("Reading distro-specific file");
-while (<DIST>) {
-    chomp;
-    s/^\s+//;
-    s/\s+$//;
-    next if /^#/;
-    next unless /\S/;
-    if (/^-(\S+)$/) {
-	if (exists($packages{$1})) {
-	    debug("Deleting $1 from package list.");
-	    delete($packages{$1});
+if (-f join('/', $opt_l, $codename)) {
+    open(DIST, join('/', $opt_l, $codename)) || die "Can't open $opt_l/$codename";
+    debug("Reading distro-specific file");
+    while (<DIST>) {
+	chomp;
+	s/^\s+//;
+	s/\s+$//;
+	next if /^#/;
+	next unless /\S/;
+	if (/^-(\S+)$/) {
+	    if (exists($packages{$1})) {
+		debug("Deleting $1 from package list.");
+		delete($packages{$1});
+	    } else {
+		warn("Package $1 is not in package list, so can't remove it.");
+	    }
+	} elsif (/^\?(\S+)$/) {
+	    debug("Adding $1 to recommendations");
+	    $packages{$1} = 2;
 	} else {
-	    warn("Package $1 is not in package list, so can't remove it.");
+	    debug("Adding $_ to dependencies");
+	    $packages{$_} = 1;
 	}
-    } elsif (/^\?(\S+)$/) {
-	debug("Adding $1 to recommendations");
-	$packages{$1} = 2;
-    } else {
-	debug("Adding $_ to dependencies");
-	$packages{$_} = 1;
     }
+    close(DIST);
+} else {
+    print "Note: No distro-specific file found.\n";
 }
-close(DIST);
 
 foreach my $pkgname (sort(keys(%packages))) {
     my $pkg = $cache->{$pkgname};
@@ -151,4 +155,3 @@ close(DEPS);
 close(RECS);
 print "Done.\n";
 exit 0;
-	
