@@ -133,9 +133,9 @@ proofgeneral
 ?libatlas-sse2-dev
 ?libatlas-doc
 ?libmpc2
-libcv-dev
-wine
-wine-dev
+?libcv-dev
+?wine
+?wine-dev
 ?xulrunner-dev
 liblapack-dev
 liblapack-doc
