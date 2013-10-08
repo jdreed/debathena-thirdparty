@@ -135,23 +135,24 @@ foreach my $pkgname (sort(keys(%packages))) {
     }
 }
 
-debug("Writing out lists");
-open(DEPS, '>', join('/', $opt_d, 'dependencies')) || die "Can't open $opt_d/dependencies for writing";
-open(RECS, '>', join('/', $opt_d, 'recommendations')) || die "Can't open $opt_d/dependencies for writing";
+my @recs = ();
+my @deps = ();
 foreach my $p (sort(keys(%packages))) {
     if ($packages{$p} == 2) {
-	print RECS "$p\n";
+	push @recs, $p;
     } else {
-	print DEPS "$p\n";
+	push @deps, $p;
 	if (exists($depends{$p})) {
 	    foreach (@{$depends{$p}}) {
 		debug("Adding $_ because we added $p");
-		print DEPS "$_\n";
+		push @deps, $_;
 	    }
 	}
     }
 }
-close(DEPS);
-close(RECS);
+open(SUBSTVARS, '>', join('/', $opt_d, 'thirdparty.substvars')) || die "Can't write to $opt_d/thirdparty.substvars";
+printf SUBSTVARS "debathena-thirdparty-depends=%s\n", join(',', @deps);
+printf SUBSTVARS "debathena-thirdparty-recommends=%s\n", join(',', @recs);
+close(SUBSTVARS);
 print "Done.\n";
 exit 0;

@@ -7,7 +7,8 @@ Build-Depends: cdbs, debhelper (>= 6), libapt-pkg-perl, lsb-release, devscripts
 
 Package: debathena-thirdparty
 Architecture: all
-Depends: ${misc:Depends}, debathena-auto-update (>= 1.44~)
+Depends: ${misc:Depends}, ${debathena-thirdparty-depends}
+Recommends: ${debathena-thirdparty-recommends}
 Replaces: debathena-thirdparty-accessories, debathena-thirdparty-audio, debathena-thirdparty-communication, debathena-thirdparty-graphics, debathena-thirdparty-information, debathena-thirdparty-languages, debathena-thirdparty-libraries, debathena-thirdparty-numerical, debathena-thirdparty-programming, debathena-thirdparty-simulation, debathena-thirdparty-sound, debathena-thirdparty-text, debathena-thirdparty-utilities
 Breaks: debathena-thirdparty-accessories, debathena-thirdparty-audio, debathena-thirdparty-communication, debathena-thirdparty-graphics, debathena-thirdparty-information, debathena-thirdparty-languages, debathena-thirdparty-libraries, debathena-thirdparty-numerical, debathena-thirdparty-programming, debathena-thirdparty-simulation, debathena-thirdparty-sound, debathena-thirdparty-text, debathena-thirdparty-utilities
 Description: Debathena thirdparty software, monolithic version
