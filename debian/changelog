@@ -7,8 +7,6 @@ debathena-thirdparty (1.2) unstable; urgency=low
   [ Jonathan Reed ]
   * Use chdist to generate the list of packages on Ubuntu, so as to
     include multiverse.
-  * Depend on the version of debathena-auto-update which has the hook for
-    thirdparty installation
   * Build-Depend on lsb-release (for lsb_release) and devscripts (for chdist)
   * Syntax errors in the common package list are now fatal
 
