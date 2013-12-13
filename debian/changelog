@@ -10,7 +10,7 @@ debathena-thirdparty (1.2) unstable; urgency=low
   * Build-Depend on lsb-release (for lsb_release) and devscripts (for chdist)
   * Syntax errors in the common package list are now fatal
 
- -- Jonathan Reed <jdreed@mit.edu>  Mon, 07 Oct 2013 09:40:28 -0400
+ -- Jonathan Reed <jdreed@mit.edu>  Fri, 13 Dec 2013 17:43:02 -0500
 
 debathena-thirdparty (1.1) unstable; urgency=low
 
